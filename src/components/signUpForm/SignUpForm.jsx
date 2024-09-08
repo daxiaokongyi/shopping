@@ -16,6 +16,8 @@ const SignUpForm = () => {
   const [formFields, setFormFields] = useState(defaultFormFields);
   const {displayName, email, password, confirmPassword} =  formFields;
 
+  // const {setCurrentUser} = useContext(UserContext);
+
   const resetFormFields = () => setFormFields(defaultFormFields);
 
   const handelSubmit = async (event) => {
@@ -27,7 +29,6 @@ const SignUpForm = () => {
 
     try {
       const user = await createAuthUserWithEmailAndPassword(email, password);
-      console.log(user);
       await createUserDocumentFromAuth(user, {displayName});
       resetFormFields();
     } catch (error) {
