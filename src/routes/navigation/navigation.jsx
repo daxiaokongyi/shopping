@@ -1,7 +1,7 @@
 import { Fragment, useContext } from "react";
 import { Outlet, Link } from "react-router-dom";
 import { ReactComponent as CrwnLogo } from '../../assets/crown.svg';
-import './navigation.css';
+import './navigation.scss';
 import { UserContext } from "../../components/contexts/UserContext";
 import { signOutUser } from "../../utils/firebase/firebase";
 import CartIcon from "../../components/cartIcon/CartIcon";
@@ -24,7 +24,7 @@ const Navigation = () => {
         </Link>
         <div className="nav-links-container">
           <Link className="nav-link" to='/shop'>
-            Shop
+            SHOP
           </Link>
           {currentUser 
             ? 

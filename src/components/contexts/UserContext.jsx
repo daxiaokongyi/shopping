@@ -13,7 +13,6 @@ export const UserProvider = ({ children }) => {
   useEffect(() => {
     // set event listener below to unsubscribe used to remove it when it's unmounted
     const unsubscribe = onAuthStateChangedListener((user) => {
-      console.log(user);
       if (user) {
         createUserDocumentFromAuth(user);
       }
