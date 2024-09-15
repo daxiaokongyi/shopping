@@ -1,5 +1,5 @@
 import { createContext, useEffect, useReducer, useState } from "react";
-import { createAction } from "../../utils/firebase/reducer/reducer";
+import { createAction } from "../../utils/reducer/reducer";
 
 export const CartContext = createContext({
   isCartOpen: false,
