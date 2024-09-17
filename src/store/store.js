@@ -4,17 +4,25 @@ import { rootReducer } from "./rootReducer";
 import storage from "redux-persist/lib/storage";
 // import { loggerMiddleware } from "./midddleware/logger";
 import logger from "redux-logger";
+import { thunk } from "redux-thunk";
 
 const persistConfig = {
   key: 'root',
   storage,
-  blacklist: ['user']
+  // blacklist: ['user']
+  whitelist: ['cart']
 }
 
 const persisedReducer = persistReducer(persistConfig, rootReducer);
 
-const middleWares = [process.env.NODE_ENV === 'development' && logger].filter(Boolean);
+const middleWares = [process.env.NODE_ENV === 'development' && logger, thunk].filter(Boolean);
 // const middleWares = [loggerMiddleware];
+
+// const thunkMiddleware = (store) => (next) => (action) => {
+//   if (typeof(action) === 'function') {
+//     action(dispatch);
+//   }
+// }
 
 const composedEnhancer = 
   (process.env.NODE_ENV !== 'production' && 
