@@ -1,11 +1,9 @@
 import { useState } from "react";
 import { signInAuthUserWithEmailAndPassword } from "../../utils/firebase/firebase";
-// import { createUserDocumentFromAuth } from "../../utils/firebase/firebase";
 import FormInput from "../formInput/FormInput";
 import Button from "../button.jsx/Button";
 import './SignInForm.scss';
 import { signInWithGooglePopup } from "../../utils/firebase/firebase";
-// import { UserContext } from "../userContext/UserContext";
 
 const defaultFormFields = {
   email: '',
@@ -15,27 +13,19 @@ const defaultFormFields = {
 const SignInForm = () => {
   const [formFields, setFormFields] = useState(defaultFormFields);
   const { email, password } =  formFields;
-  // const {setCurrentUser} = useContext(UserContext);
 
   const resetFormFields = () => setFormFields(defaultFormFields);
 
   const signInWithGoogle = async () => {
-    // const {user} = await signInWithGooglePopup();
     await signInWithGooglePopup();
-    // setCurrentUser(user);
-    // await createUserDocumentFromAuth(user);
   }
 
   const handelSubmit = async (event) => {
     // don't want to have any default behavior of the form
     event.preventDefault();
 
-    // const {email, password, confirmPassword} = formFields;
-
     try {
       await signInAuthUserWithEmailAndPassword(email, password);
-      // console.log(user);
-      // setCurrentUser(user);
       resetFormFields();
     } catch (error) {
       console.log(error);
@@ -56,22 +46,6 @@ const SignInForm = () => {
   const handleChange = (event) => {
     const {name, value} = event.target;
     setFormFields({...formFields, [name]: value});
-    // switch(name) {
-    //   case 'displayname':
-    //     setFormFields({...formFields, [name]: value});
-    //     break;
-    //   case 'email':
-    //     setFormFields({...formFields, [name]: value});
-    //     break;
-    //   case 'password':
-    //     setFormFields({...formFields, [name]: value});
-    //     break; 
-    //   case 'confirmPassword':
-    //     setFormFields({...formFields, [name]: value});
-    //     break;
-    //   default:
-    //     break;
-    // }
   }
 
   return (

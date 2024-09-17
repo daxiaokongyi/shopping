@@ -4,15 +4,18 @@ import { Fragment, useEffect } from 'react';
 import { useState } from 'react';
 import ProductCard from '../../components/productCard/ProductCard';
 import { useSelector } from 'react-redux';
-import { selectCategoryMap } from '../../store/categories/categorySelector';
+import { selectCategoriesMap } from '../../store/categories/categorySelector';
+
 
 const Category = () => {
   const {category} = useParams();
-  const categoriesMap = useSelector(selectCategoryMap);
-  const categoryTitle = category.substring(0,1).toUpperCase() + category.substring(1).toLocaleLowerCase();
+  console.log(`render/re-rendering category component`);
+  const categoriesMap = useSelector(selectCategoriesMap);
+  const categoryTitle = category;
   const [products, setProducts] = useState(categoriesMap[categoryTitle]);
 
   useEffect(() => {
+    console.log('effect fired calling setProducts');
     setProducts(categoriesMap[categoryTitle]);
   },[category, categoriesMap, categoryTitle]);
 
