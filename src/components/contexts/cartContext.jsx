@@ -1,4 +1,4 @@
-import { createContext, useEffect, useReducer, useState } from "react";
+import { createContext, useReducer } from "react";
 import { createAction } from "../../utils/reducer/reducer";
 
 export const CartContext = createContext({
@@ -75,22 +75,8 @@ const cartReducer = (state, action) => {
 
 
 export const CartProvider = ({children}) => {
-  // const [isCartOpen, setIsCartOpen] = useState(false);
-  // const [cartItems, setCartItems] = useState([]);
-  // const [cartCount, setCartCount] = useState(0);
-  // const [totalPrice, setTotalPrice] = useState(0);
   const [state, dispatch] = useReducer(cartReducer, INITIAL_STATE);
   const {isCartOpen, cartItems, cartCount, totalPrice} = state;
-
-  // useEffect(() => {
-  //   const newCartCount = cartItems.reduce((total, cartItem) => total + cartItem.quantity, 0);
-  //   setCartCount(newCartCount);
-  // }, [cartItems]);
-
-  // useEffect(() => {
-  //   const newCartTotal = cartItems.reduce((totalPrice, cartItem) => totalPrice + cartItem.price * cartItem.quantity, 0);
-  //   setTotalPrice(newCartTotal);
-  // }, [cartItems]);
 
   const updateCartItemsReducer = (newCartItems) => {
     const newCartCount = newCartItems.reduce((total, cartItem) => total += cartItem.quantity, 0);
@@ -105,22 +91,18 @@ export const CartProvider = ({children}) => {
   }
 
   const adddItemToCart = (productToAdd) => {
-    // return setCartItems(addCartItem(cartItems, productToAdd));
     const newCartItems = addCartItem(cartItems, productToAdd);
     updateCartItemsReducer(newCartItems);
   }
 
   const removeItemFromCart = (cartItemToRemove) => {
-    // return setCartItems(removeCartItem(cartItems, cartItemToRemove));
     const newCartItems = removeCartItem(cartItems, cartItemToRemove);
     updateCartItemsReducer(newCartItems);
   }
 
   const clearItemFromCart = (cartItemToClear) => {
-    // return setCartItems(clearCartItem(cartItems, cartItemToClear));
     const newCartItems = clearCartItem(cartItems, cartItemToClear);
     updateCartItemsReducer(newCartItems);
-
   }
 
   const setIsCartOpen = (bool) => dispatch(createAction(CART_ACTION_TYPE.SET_IS_CART_OPEN, {isCartOpen: bool}))

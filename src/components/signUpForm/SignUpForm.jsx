@@ -15,16 +15,12 @@ const defaultFormFields = {
 const SignUpForm = () => {
   const [formFields, setFormFields] = useState(defaultFormFields);
   const {displayName, email, password, confirmPassword} =  formFields;
-
-  // const {setCurrentUser} = useContext(UserContext);
-
   const resetFormFields = () => setFormFields(defaultFormFields);
 
   const handelSubmit = async (event) => {
     // don't want to have any default behavior of the form
     event.preventDefault();
 
-    // const {email, password, confirmPassword} = formFields;
     if (password !== confirmPassword) return;
 
     try {
@@ -43,22 +39,6 @@ const SignUpForm = () => {
   const handleChange = (event) => {
     const {name, value} = event.target;
     setFormFields({...formFields, [name]: value});
-    // switch(name) {
-    //   case 'displayname':
-    //     setFormFields({...formFields, [name]: value});
-    //     break;
-    //   case 'email':
-    //     setFormFields({...formFields, [name]: value});
-    //     break;
-    //   case 'password':
-    //     setFormFields({...formFields, [name]: value});
-    //     break; 
-    //   case 'confirmPassword':
-    //     setFormFields({...formFields, [name]: value});
-    //     break;
-    //   default:
-    //     break;
-    // }
   }
 
   return (
