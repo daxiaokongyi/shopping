@@ -74,8 +74,6 @@ export const getCategoriesAndDocuments = async () => {
   // return categormap;
 }
 
-
-
 export const createUserDocumentFromAuth = async (userAuth, additionalInformation = {}) => {
   if (!userAuth) return;
   const userDocRef = doc(db, 'users', userAuth.user ? userAuth.user.uid : userAuth.uid);
@@ -88,7 +86,7 @@ export const createUserDocumentFromAuth = async (userAuth, additionalInformation
     const createdAt = new Date();
 
     try {
-      setDoc(userDocRef, {
+      await setDoc(userDocRef, {
         displayName,
         email,
         createdAt,
@@ -99,7 +97,8 @@ export const createUserDocumentFromAuth = async (userAuth, additionalInformation
     }
   } 
 
-  return userDocRef;
+  // return userDocRef;
+  return userSnapshot;
 }
 
 export const createAuthUserWithEmailAndPassword = async (email, password) => {
@@ -117,3 +116,16 @@ export const signInAuthUserWithEmailAndPassword = async (email, password) => {
 export const signOutUser = async () => signOut(auth);
 
 export const onAuthStateChangedListener = (callback) => onAuthStateChanged(auth, callback);
+
+export const getCurrentUser = () => {
+  return new Promise((resolve, reject) => {
+    const unsubscribe = onAuthStateChanged(
+      auth,
+      (userAuth) => {
+        unsubscribe();
+        resolve(userAuth);
+      },
+      reject
+    );
+  });
+};
