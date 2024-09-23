@@ -1,5 +1,5 @@
 import './productCard.scss'
-import Button from '../button.jsx/Button';
+import Button from '../button/Button';
 import { adddItemToCart } from '../../store/cart/cartAction';
 import { selectCartItems } from '../../store/cart/cartSelector';
 import { useDispatch, useSelector } from 'react-redux';
