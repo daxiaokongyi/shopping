@@ -1,9 +1,8 @@
 import { useState } from "react";
 import FormInput from "../formInput/FormInput";
-import Button from "../button.jsx/Button";
+import Button from "../button/Button";
 import './SignUpForm.scss';
 import { useDispatch } from "react-redux";
-// import { USER_ACTION_TYPES } from "../../store/user/userType";
 import { signUpStart } from "../../store/user/userAction";
 
 const defaultFormFields = {

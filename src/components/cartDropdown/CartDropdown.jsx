@@ -1,5 +1,5 @@
 import './CartDropdown.scss';
-import Button from '../button.jsx/Button';
+import Button from '../button/Button';
 import CartItem from '../cartItem/CartItem';
 import { useNavigate } from 'react-router-dom';
 import { useSelector } from 'react-redux';
